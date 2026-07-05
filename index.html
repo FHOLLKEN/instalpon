@@ -136,10 +136,10 @@
         .logo-bar:nth-child(2) { width: 25px; margin-left: 5px; }
 
         .logo-img {
-            height: 40px;
-            width: auto;
-            border-radius: 6px;
-            object-fit: contain;
+            height: 80px;
+            width: 80px;
+            border-radius: 12px;
+            object-fit: cover;
         }
 
         .nav-links {
@@ -199,7 +199,7 @@
 
         /* ===== HERO ===== */
         .hero {
-            margin-top: 70px;
+            margin-top: 112px;
             min-height: 60vh;
             background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.7) 100%), 
                         url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=800&fit=crop');
@@ -549,7 +549,7 @@
             background: white;
             padding: 1.5rem 5%;
             position: sticky;
-            top: 70px;
+            top: 112px;
             z-index: 100;
             box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             overflow-x: auto;
@@ -989,6 +989,12 @@
             align-items: center;
             justify-content: center;
             gap: 0.8rem;
+            color: white;
+            font-family: inherit;
+            width: 100%;
+            padding: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         footer p { color: #a1a1a1; margin-top: 0.5rem; font-size: 0.95rem; }
@@ -1256,6 +1262,7 @@
             color: white;
             border: none;
             border-radius: 50%;
+            overflow: hidden;
             cursor: pointer;
             font-size: 1.2rem;
             display: flex;
@@ -1628,10 +1635,11 @@
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .menu-toggle { display: block; }
-            .hero { min-height: 50vh; }
+            .logo-img { height: 56px; width: 56px; }
+            .hero { min-height: 50vh; margin-top: 88px; }
             .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .cart-sidebar { width: 100%; }
-            .filters { top: 60px; padding: 1rem; }
+            .filters { top: 88px; padding: 1rem; }
             .info-bar { gap: 1rem; }
             .contact-section { grid-template-columns: 1fr; }
             .history { grid-template-columns: 1fr; padding: 2rem; }
@@ -1734,7 +1742,9 @@
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
         <a href="#" class="logo">
-            <img src="logo-instalpon.jpeg" alt="INSTALPON" class="logo-img">
+            <video class="logo-img" autoplay muted loop playsinline poster="logo-instalpon.jpeg" aria-label="Logo animado INSTALPON">
+                <source src="logo-instalpon.mp4" type="video/mp4">
+            </video>
             <span>INSTALPON</span>
         </a>
 
@@ -1832,7 +1842,9 @@
             </div>
         </div>
         <div class="history-img">
-            <img src="logo-instalpon.jpeg" alt="INSTALPON" style="width:100%;max-width:300px;border-radius:16px;opacity:0.9;">
+            <video autoplay muted loop playsinline poster="logo-instalpon.jpeg" style="width:100%;max-width:600px;border-radius:16px;opacity:0.9;object-fit:cover;">
+                <source src="logo-instalpon.mp4" type="video/mp4">
+            </video>
         </div>
     </section>
 
@@ -1990,10 +2002,12 @@
 
     <!-- ===== FOOTER ===== -->
     <footer>
-        <div class="footer-brand">
-            <img src="logo-instalpon.jpeg" alt="INSTALPON" style="height:36px;width:auto;border-radius:6px;">
+        <button class="footer-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Volver al inicio" style="background:none;border:none;cursor:pointer;padding:0;margin:0 auto 0.5rem;">
+            <video autoplay muted loop playsinline poster="logo-instalpon.jpeg" style="height:72px;width:72px;border-radius:12px;object-fit:cover;">
+                <source src="logo-instalpon.mp4" type="video/mp4">
+            </video>
             INSTALPON
-        </div>
+        </button>
         <p>Tienda Online - Materiales de Construcción</p>
         <div class="footer-contact">
             <a href="tel:+56999978566"><i class="fas fa-phone"></i> +56 9 9997 8566</a>
