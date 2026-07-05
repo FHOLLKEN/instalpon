@@ -622,6 +622,20 @@
             font-weight: 400;
         }
 
+        .product-price-wrap {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .iva-note {
+            font-size: 0.68rem;
+            color: var(--gray);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        body.dark-mode .iva-note { color: #a0a0b0; }
+
         .btn-add-cart {
             background: var(--dark);
             color: white;
@@ -1944,15 +1958,19 @@
         </div>
         <div class="cart-footer">
             <div class="cart-total-row">
-                <span>Subtotal</span>
+                <span>Subtotal (neto)</span>
                 <span id="cartSubtotal">$0</span>
+            </div>
+            <div class="cart-total-row">
+                <span>IVA (19%)</span>
+                <span id="cartIva">$0</span>
             </div>
             <div class="cart-total-row">
                 <span>Envío</span>
                 <span style="color:var(--primary);font-weight:600;">A cotizar</span>
             </div>
             <div class="cart-total-row total">
-                <span>Total</span>
+                <span>Total (IVA incluido)</span>
                 <span id="cartTotal">$0</span>
             </div>
             <div class="cart-extra-actions">
@@ -2161,7 +2179,10 @@
                         <div class="product-name">${p.name}</div>
                         <div class="product-desc">${p.desc}</div>
                         <div class="product-footer">
-                            <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                            <div class="product-price-wrap">
+                                <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                                <div class="iva-note">IVA incluido</div>
+                            </div>
                             <button class="btn-add-cart" onclick="addToCart(${p.id})">
                                 <i class="fas fa-cart-plus"></i> Agregar
                             </button>
@@ -2242,12 +2263,16 @@
             const cartCount = document.getElementById('cartCount');
             const cartCountMobile = document.getElementById('cartCountMobile');
             const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartIva = document.getElementById('cartIva');
             const cartTotal = document.getElementById('cartTotal');
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const subtotalNeto = Math.round(totalPrice / 1.19);
+            const ivaMonto = totalPrice - subtotalNeto;
             cartCount.textContent = totalItems;
             if (cartCountMobile) cartCountMobile.textContent = totalItems;
-            cartSubtotal.textContent = formatPrice(totalPrice);
+            cartSubtotal.textContent = formatPrice(subtotalNeto);
+            if (cartIva) cartIva.textContent = formatPrice(ivaMonto);
             cartTotal.textContent = formatPrice(totalPrice);
             if (cart.length === 0) {
                 cartItems.innerHTML = `
@@ -2394,7 +2419,10 @@
                             <div class="product-name">${p.name}</div>
                             <div class="product-desc">${p.desc}</div>
                             <div class="product-footer">
-                                <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                                <div class="product-price-wrap">
+                                    <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                                    <div class="iva-note">IVA incluido</div>
+                                </div>
                                 <button class="btn-add-cart" onclick="addToCart(${p.id})">
                                     <i class="fas fa-cart-plus"></i> Agregar
                                 </button>
@@ -2607,13 +2635,17 @@
         function printCart() {
             if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const subtotalNeto = Math.round(totalPrice / 1.19);
+            const ivaMonto = totalPrice - subtotalNeto;
             const printContent = `<html><head><title>Cotización INSTALPON</title><style>
                 body{font-family:Arial,sans-serif;padding:40px;max-width:600px;margin:0 auto}
                 h1{color:#e85d04;border-bottom:3px solid #e85d04;padding-bottom:10px}
                 .logo{text-align:center;margin-bottom:20px}
                 .logo img{max-width:120px;height:auto;border-radius:8px}
                 .item{padding:12px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
-                .total{font-size:1.3rem;font-weight:bold;color:#e85d04;margin-top:20px;padding-top:20px;border-top:2px solid #e85d04}
+                .summary{margin-top:20px}
+                .summary-row{display:flex;justify-content:space-between;padding:6px 0;color:#444;font-size:0.95rem}
+                .total{font-size:1.3rem;font-weight:bold;color:#e85d04;margin-top:10px;padding-top:15px;border-top:2px solid #e85d04;display:flex;justify-content:space-between}
                 .footer{margin-top:40px;font-size:0.85rem;color:#666;text-align:center}
                 .date{color:#999;font-size:0.9rem;margin-bottom:20px}
                 </style></head><body>
@@ -2621,7 +2653,11 @@
                 <p class="date">Cotización generada el ${new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}</p>
                 <h2>Detalle de Productos</h2>
                 ${cart.map(item=>`<div class="item"><span>${item.name} x${item.quantity}</span><span>${formatPrice(item.price*item.quantity)}</span></div>`).join('')}
-                <div class="total">Total: ${formatPrice(totalPrice)}</div>
+                <div class="summary">
+                    <div class="summary-row"><span>Subtotal (neto)</span><span>${formatPrice(subtotalNeto)}</span></div>
+                    <div class="summary-row"><span>IVA (19%)</span><span>${formatPrice(ivaMonto)}</span></div>
+                    <div class="total"><span>Total (IVA incluido)</span><span>${formatPrice(totalPrice)}</span></div>
+                </div>
                 <div class="footer"><p><strong>INSTALPON</strong> - Materiales de Construcción</p>
                 <p>Calle Panamericana Nte. 528, Puerto Montt</p>
                 <p>Tel: +56 9 9997 8566 | contactos@instalpon.cl</p>
