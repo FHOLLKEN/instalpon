@@ -1,0 +1,2708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSTALPON | Tienda Online - Materiales de Construcción Puerto Montt</title>
+    <meta name="description" content="Tienda online de INSTALPON. Materiales de construcción, cubiertas, revestimientos, aislamiento y más con envío a Regiones IX, XIV, X y XI.">
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#e85d04">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="INSTALPON">
+    <link rel="apple-touch-icon" href="logo-instalpon.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e85d04;
+            --primary-dark: #c44a00;
+            --secondary: #f48c06;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
+            --gray: #6b7280;
+            --glass: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(26, 26, 26, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .logo-bar {
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+
+        .logo-bar:nth-child(1) { width: 35px; }
+        .logo-bar:nth-child(2) { width: 25px; margin-left: 5px; }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .cart-btn {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .cart-badge {
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px; height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            margin-top: 70px;
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=800&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(232, 93, 4, 0.15);
+            border: 1px solid rgba(232, 93, 4, 0.3);
+            color: var(--primary);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+
+        .hero h1 span { color: var(--primary); }
+
+        .hero p {
+            color: #c0c0c0;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        /* ===== SECCIONES GENERALES ===== */
+        .section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+        #productos .section-subtitle {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== HISTORIA ===== */
+        .history {
+            background: var(--dark);
+            color: white;
+            border-radius: 30px;
+            margin: 2rem 5%;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .history h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .history h2 span { color: var(--primary); }
+
+        .history p {
+            color: #a1a1a1;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .history .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .history-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 50px; height: 50px;
+            background: var(--glass);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .history-img {
+            text-align: center;
+            font-size: 8rem;
+            opacity: 0.15;
+        }
+
+        /* ===== TRABAJOS REALIZADOS - GALERÍA ===== */
+        .works {
+            background: linear-gradient(180deg, var(--light) 0%, #e8e8e8 100%);
+            padding: 4rem 5%;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .works .section-title { color: var(--dark); }
+        .works .section-subtitle { color: var(--gray); }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 280px;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-overlay h4 {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            transform: translateY(10px);
+            transition: transform 0.4s;
+        }
+
+        .gallery-overlay p {
+            color: #ccc;
+            font-size: 0.9rem;
+            transform: translateY(10px);
+            transition: transform 0.4s 0.1s;
+        }
+
+        .gallery-item:hover .gallery-overlay h4,
+        .gallery-item:hover .gallery-overlay p {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay .zoom-icon {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 60px; height: 60px;
+            background: rgba(232, 93, 4, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.4s 0.15s;
+        }
+
+        .gallery-item:hover .zoom-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-img {
+            max-width: 85%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: lightboxIn 0.4s ease;
+        }
+
+        @keyframes lightboxIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 50px; height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover { background: rgba(255,255,255,0.1); }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 0 1rem;
+        }
+
+        .lightbox-caption h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .lightbox-caption p {
+            color: #aaa;
+            font-size: 1rem;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FILTROS TIENDA ===== */
+        .filters {
+            background: white;
+            padding: 1.5rem 5%;
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        .filters-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1.4rem;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            white-space: nowrap;
+            color: var(--dark);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(232, 93, 4, 0.3);
+        }
+
+        /* ===== PRODUCTOS ===== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .product-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img { transform: scale(1.08); }
+
+        .product-tag {
+            position: absolute;
+            top: 0.8rem; left: 0.8rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-info { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.3rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+
+        .product-desc {
+            color: var(--gray);
+            font-size: 0.82rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            gap: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .product-price span {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .btn-add-cart {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* ===== INFO BAR ===== */
+        .info-bar {
+            background: var(--dark);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+        }
+
+        .info-bar span { display: flex; align-items: center; gap: 0.5rem; color: #a1a1a1; }
+        .info-bar i { color: var(--primary); }
+
+        /* ===== CONTACTO / MAPA ===== */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: stretch;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info h2 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--dark); }
+
+        .contact-info p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover { transform: translateX(5px); }
+
+        .contact-icon {
+            width: 45px; height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .map-container {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 400px;
+        }
+
+        /* ===== CARRITO SIDEBAR ===== */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -450px;
+            width: 450px; max-width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 2001;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+        }
+
+        .cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            padding: 1.5rem 2rem;
+            background: var(--dark);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-cart:hover { background: rgba(255,255,255,0.1); }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .cart-item-img {
+            width: 65px; height: 65px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .cart-item-info { flex: 1; }
+
+        .cart-item-name { font-weight: 700; margin-bottom: 0.2rem; font-size: 0.95rem; }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 0.4rem;
+        }
+
+        .qty-btn {
+            width: 26px; height: 26px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover { background: var(--light); border-color: var(--primary); }
+
+        .remove-item {
+            color: #ef4444;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: auto;
+            transition: color 0.2s;
+        }
+
+        .remove-item:hover { color: #dc2626; }
+
+        .cart-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray);
+        }
+
+        .cart-empty i { font-size: 4rem; margin-bottom: 1rem; opacity: 0.3; }
+
+        .cart-footer {
+            padding: 1.5rem 2rem;
+            border-top: 2px solid #eee;
+            background: #fafafa;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .cart-total-row.total {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            padding-top: 0.5rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(232, 93, 4, 0.4);
+        }
+
+        .cart-note {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            margin-top: 0.8rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer .footer-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+        }
+
+        footer p { color: #a1a1a1; margin-top: 0.5rem; font-size: 0.95rem; }
+
+        footer .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        footer .footer-contact a {
+            color: #a1a1a1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        footer .footer-contact a:hover { color: var(--primary); }
+
+        /* ===== WHATSAPP FLOTANTE ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px; height: 60px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1500;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 70px;
+            background: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 75px;
+        }
+
+        
+        /* ===== BUSCADOR ===== */
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1.2rem 1rem 3rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(232, 93, 4, 0.1);
+        }
+        .search-box i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        .search-box .clear-search {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1rem;
+            display: none;
+        }
+        .search-box .clear-search.visible { display: block; }
+
+        /* ===== TOAST RESTAURAR CARRITO ===== */
+        .restore-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: white;
+            border-left: 4px solid var(--primary);
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 2500;
+            display: none;
+            max-width: 360px;
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .restore-toast.show { display: block; }
+        .restore-toast p {
+            margin: 0 0 0.8rem;
+            color: var(--dark);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .restore-toast strong { color: var(--primary); }
+        .restore-actions {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: flex-end;
+        }
+        .restore-actions button {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .btn-restore-yes {
+            background: var(--primary);
+            color: white;
+        }
+        .btn-restore-yes:hover { background: var(--primary-dark); }
+        .btn-restore-no {
+            background: #f3f4f6;
+            color: var(--gray);
+        }
+        .btn-restore-no:hover { background: #e5e7eb; }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+
+        
+
+        
+
+        
+        /* ===== PAGINACIÓN ===== */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+        .products-header-left { flex: 1; min-width: 250px; }
+        .products-header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: nowrap;
+        }
+        .pagination-info {
+            color: var(--dark);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            margin-right: 0.4rem;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+        }
+        .pagination {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            flex-wrap: nowrap;
+        }
+        .pagination button, .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 22px;
+            min-width: 22px;
+            padding: 0 0.35rem;
+            border: 1.5px solid #e5e7eb;
+            background: white;
+            border-radius: 5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        .pagination button:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(232, 93, 4, 0.15);
+        }
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(232, 93, 4, 0.3);
+            font-weight: 800;
+        }
+        .pagination button:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            border-color: #ddd;
+        }
+        .pagination button.nav { 
+            padding: 0 0.5rem; 
+            font-size: 0.7rem; 
+            font-weight: 700;
+        }
+        .pagination span {
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            color: var(--gray);
+            min-width: 14px;
+            height: 22px;
+        }
+        
+        /* ===== BOTÓN VOLVER ARRIBA ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(232, 93, 4, 0.4);
+            z-index: 1400;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            transform: translateY(20px);
+        }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(232, 93, 4, 0.5);
+        }
+
+        
+        /* ===== ANIMACIONES DE ENTRADA (SCROLL REVEAL) ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        .reveal-delay-6 { transition-delay: 0.6s; }
+
+        /* ===== SKELETON LOADERS ===== */
+        @keyframes skeletonPulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #e5e7eb 25%, #f0f0f0 50%, #e5e7eb 75%);
+            background-size: 200% 100%;
+            animation: skeletonPulse 1.5s ease-in-out infinite;
+            border-radius: 8px;
+        }
+        .product-img.skeleton-loading {
+            animation: skeletonPulse 1.5s ease-in-out infinite;
+            background: linear-gradient(90deg, #ddd 25%, #eee 50%, #ddd 75%);
+            background-size: 200% 100%;
+        }
+        .product-img.loaded {
+            animation: none;
+            background: none;
+        }
+
+        /* ===== HOVER EFFECTS ELABORADOS EN TARJETAS ===== */
+        .product-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(232,93,4,0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 16px;
+        }
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        .product-card:hover .product-img-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.15);
+            transition: background 0.3s;
+            border-radius: 16px 16px 0 0;
+        }
+        .product-card .btn-add-cart {
+            position: relative;
+            z-index: 2;
+        }
+        .product-card:hover .product-name {
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        /* ===== MODO OSCURO TOGGLE EN NAVBAR ===== */
+        .theme-toggle-nav {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .theme-toggle-nav:hover {
+            background: var(--primary);
+            transform: scale(1.1) rotate(15deg);
+        }
+        body.dark-mode .theme-toggle-nav {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            color: #f48c06;
+        }
+        body.dark-mode .theme-toggle-nav:hover {
+            background: #f48c06;
+            color: white;
+        }
+
+        /* ===== MODO OSCURO - TODA LA WEB ===== */
+        body.dark-mode { background: #0f0f1a; color: #e0e0e0; }
+        body.dark-mode .section { background: #0f0f1a; }
+        body.dark-mode .section-title { color: white; }
+        body.dark-mode .section-subtitle { color: #a0a0b0; }
+        body.dark-mode .hero { background: linear-gradient(135deg, rgba(15,15,26,0.95) 0%, rgba(15,15,26,0.85) 100%), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&h=800&fit=crop'); }
+        body.dark-mode .hero p { color: #b0b0c0; }
+        body.dark-mode .hero-badge { background: rgba(232,93,4,0.15); border-color: rgba(232,93,4,0.3); }
+        body.dark-mode .history { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        body.dark-mode .history p { color: #b0b0c0; }
+        body.dark-mode .history .highlight { color: #ff8c42; }
+        body.dark-mode .history-img { opacity: 0.2; }
+        body.dark-mode .works { background: linear-gradient(180deg, #0f0f1a 0%, #1a1a2e 100%); }
+        body.dark-mode .works .section-title { color: white; }
+        body.dark-mode .works .section-subtitle { color: #a0a0b0; }
+        body.dark-mode .filters { background: #16213e; border-color: rgba(255,255,255,0.05); box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+        body.dark-mode .filter-btn { background: #1a1a2e; border-color: #2a2a4a; color: #c0c0d0; }
+        body.dark-mode .filter-btn:hover, body.dark-mode .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        body.dark-mode .product-card { background: #16213e; border-color: rgba(255,255,255,0.05); }
+        body.dark-mode .product-name { color: white; }
+        body.dark-mode .product-desc { color: #a0a0b0; }
+        body.dark-mode .product-price { color: #ff8c42; }
+        body.dark-mode .product-price span { color: #a0a0b0; }
+        body.dark-mode .search-box input { background: #16213e; border-color: #2a2a4a; color: white; }
+        body.dark-mode .search-box input::placeholder { color: #6b6b8a; }
+        body.dark-mode .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(232,93,4,0.15); }
+        body.dark-mode .contact-item { background: #16213e; }
+        body.dark-mode .contact-item strong { color: white; }
+        body.dark-mode .contact-item p { color: #a0a0b0; }
+        body.dark-mode .map-container { box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        body.dark-mode .pagination button, body.dark-mode .pagination span { background: #16213e; border-color: #2a2a4a; color: white; }
+        body.dark-mode .pagination button:hover { border-color: var(--primary); }
+        body.dark-mode .pagination-info { color: #a0a0b0; }
+        body.dark-mode .info-bar { background: #16213e; border-top: 1px solid #2a2a4a; }
+        body.dark-mode .info-bar span { color: #a0a0b0; }
+        body.dark-mode .theme-toggle { background: #f48c06; color: white; border-color: #f48c06; }
+        body.dark-mode .scroll-top { background: var(--primary); }
+        body.dark-mode .restore-toast { background: #16213e; border-color: var(--primary); }
+        body.dark-mode .restore-toast p { color: white; }
+        body.dark-mode .cart-sidebar { background: #1a1a2e; }
+        body.dark-mode .cart-header { background: #16213e; }
+        body.dark-mode .cart-item { border-color: #2a2a4a; }
+        body.dark-mode .cart-item-name { color: white; }
+        body.dark-mode .cart-footer { background: #16213e; border-color: #2a2a4a; }
+        body.dark-mode .cart-total-row.total { color: white; }
+        body.dark-mode .cart-empty { color: #a0a0b0; }
+        body.dark-mode .btn-restore-no { background: #2a2a4a; color: #a0a0b0; }
+        body.dark-mode .btn-restore-no:hover { background: #3a3a5a; }
+        body.dark-mode footer { background: #0a0a15; }
+        body.dark-mode footer p { color: #808090; }
+        body.dark-mode .footer-contact a { color: #808090; }
+        body.dark-mode .footer-contact a:hover { color: var(--primary); }
+        body.dark-mode .navbar { background: rgba(15,15,26,0.98); }
+        body.dark-mode .gallery-item { box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+        body.dark-mode .gallery-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); }
+        body.dark-mode .lightbox { background: rgba(0,0,0,0.98); }
+        body.dark-mode .skeleton { background: linear-gradient(90deg, #1a1a2e 25%, #22223e 50%, #1a1a2e 75%); }
+
+        
+        /* ===== MINI-CARRITO DROPDOWN ===== */
+        .mini-cart-wrap {
+            position: relative;
+        }
+        .mini-cart-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            width: 340px;
+            max-width: 90vw;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+        .mini-cart-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .mini-cart-header {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mini-cart-header h4 {
+            font-size: 1rem;
+            color: var(--dark);
+            margin: 0;
+        }
+        .mini-cart-header span {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+        .mini-cart-items {
+            max-height: 280px;
+            overflow-y: auto;
+            padding: 0.5rem 0;
+        }
+        .mini-cart-item {
+            display: flex;
+            gap: 0.8rem;
+            padding: 0.8rem 1.5rem;
+            align-items: center;
+            transition: background 0.2s;
+        }
+        .mini-cart-item:hover { background: #f8f9fa; }
+        .mini-cart-item img {
+            width: 45px; height: 45px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .mini-cart-item-info { flex: 1; }
+        .mini-cart-item-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.15rem;
+        }
+        .mini-cart-item-qty {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+        .mini-cart-item-price {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .mini-cart-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+        .mini-cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        .mini-cart-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        .mini-cart-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(232,93,4,0.3);
+        }
+        .mini-cart-empty {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        .mini-cart-empty i { font-size: 2.5rem; opacity: 0.3; margin-bottom: 0.5rem; display: block; }
+
+        /* ===== CONTADOR ANIMADO ===== */
+        @keyframes cartBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            50% { transform: scale(0.9); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .cart-badge.animate {
+            animation: cartBounce 0.5s ease;
+        }
+
+        /* ===== TOAST PRODUCTO AGREGADO ===== */
+        .product-toast {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            background: white;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            z-index: 2500;
+            display: none;
+            align-items: center;
+            gap: 0.8rem;
+            max-width: 320px;
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-toast.show { display: flex; }
+        .product-toast img {
+            width: 45px; height: 45px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .product-toast-text { flex: 1; }
+        .product-toast-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        .product-toast-text strong { color: var(--primary); }
+        .product-toast-close {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.2rem;
+        }
+
+        /* ===== DARK MODE MINI-CARRITO ===== */
+        body.dark-mode .mini-cart-dropdown { background: #1a1a2e; box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
+        body.dark-mode .mini-cart-header { border-color: #2a2a4a; }
+        body.dark-mode .mini-cart-header h4 { color: white; }
+        body.dark-mode .mini-cart-header span { color: #a0a0b0; }
+        body.dark-mode .mini-cart-item:hover { background: #16213e; }
+        body.dark-mode .mini-cart-item-name { color: white; }
+        body.dark-mode .mini-cart-item-qty { color: #a0a0b0; }
+        body.dark-mode .mini-cart-footer { background: #16213e; border-color: #2a2a4a; }
+        body.dark-mode .mini-cart-total { color: white; }
+        body.dark-mode .mini-cart-empty { color: #a0a0b0; }
+        body.dark-mode .product-toast { background: #16213e; border-color: var(--primary); }
+        body.dark-mode .product-toast-text p { color: white; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: block; }
+            .hero { min-height: 50vh; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .cart-sidebar { width: 100%; }
+            .filters { top: 60px; padding: 1rem; }
+            .info-bar { gap: 1rem; }
+            .contact-section { grid-template-columns: 1fr; }
+            .history { grid-template-columns: 1fr; padding: 2rem; }
+            .history-features { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .lightbox-img { max-width: 95%; }
+            .lightbox-nav { width: 40px; height: 40px; font-size: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    
+        /* ===== FICHA TÉCNICA ===== */
+        .product-details-btn {
+            background: none; border: none; color: var(--primary); font-size: 0.8rem;
+            font-weight: 600; cursor: pointer; display: flex; align-items: center;
+            gap: 0.3rem; margin-top: 0.5rem; padding: 0.3rem 0; transition: color 0.3s;
+            width: 100%; justify-content: flex-start;
+        }
+        .product-details-btn:hover { color: var(--primary-dark); }
+        .product-details-btn i { transition: transform 0.3s; }
+        .product-details-btn.active i { transform: rotate(180deg); }
+        .product-details-panel {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease;
+            background: #f8f9fa; border-radius: 8px; margin-top: 0.5rem;
+        }
+        .product-details-panel.open { max-height: 300px; padding: 0.8rem; }
+        .product-details-panel ul { list-style: none; padding: 0; margin: 0; }
+        .product-details-panel li {
+            display: flex; justify-content: space-between; padding: 0.3rem 0;
+            font-size: 0.8rem; border-bottom: 1px solid #eee;
+        }
+        .product-details-panel li:last-child { border-bottom: none; }
+        .product-details-panel li span:first-child { color: var(--gray); }
+        .product-details-panel li span:last-child { font-weight: 600; color: var(--dark); }
+        body.dark-mode .product-details-panel { background: #1a1a2e; }
+        body.dark-mode .product-details-panel li { border-color: #2a2a4a; }
+        body.dark-mode .product-details-panel li span:first-child { color: #a0a0b0; }
+        body.dark-mode .product-details-panel li span:last-child { color: white; }
+
+        /* ===== TESTIMONIOS ===== */
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem; max-width: 1400px; margin: 0 auto;
+        }
+        .testimonial-card {
+            background: white; border-radius: 20px; padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06); transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .testimonial-stars { color: #f48c06; margin-bottom: 1rem; font-size: 0.9rem; }
+        .testimonial-text { color: var(--gray); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 0.8rem; }
+        .testimonial-avatar {
+            width: 45px; height: 45px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.1rem;
+        }
+        .testimonial-author strong { display: block; color: var(--dark); font-size: 0.95rem; }
+        .testimonial-author span { font-size: 0.8rem; color: var(--gray); }
+        body.dark-mode .testimonial-card { background: #16213e; border-color: rgba(255,255,255,0.05); }
+        body.dark-mode .testimonial-text { color: #a0a0b0; }
+        body.dark-mode .testimonial-author strong { color: white; }
+        body.dark-mode .testimonial-author span { color: #808090; }
+
+        /* ===== BOTONES EXTRA CARRITO ===== */
+        .cart-extra-actions { display: flex; gap: 0.6rem; margin-bottom: 1rem; }
+        .cart-extra-actions button {
+            flex: 1; padding: 0.7rem; border-radius: 10px; border: 1.5px solid #e5e7eb;
+            background: white; color: var(--dark); font-weight: 600; font-size: 0.85rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            gap: 0.4rem; transition: all 0.3s;
+        }
+        .cart-extra-actions button:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+        body.dark-mode .cart-extra-actions button { background: #1a1a2e; border-color: #2a2a4a; color: white; }
+        body.dark-mode .cart-extra-actions button:hover { border-color: var(--primary); }
+
+        /* ===== TOAST COMPARTIR ===== */
+        .share-toast {
+            position: fixed; top: 90px; right: 20px; background: white;
+            border-left: 4px solid #25d366; padding: 1rem 1.3rem; border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15); z-index: 2500; display: none;
+            align-items: center; gap: 0.8rem; max-width: 320px;
+            animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .share-toast.show { display: flex; }
+        .share-toast i { color: #25d366; font-size: 1.2rem; }
+        .share-toast p { margin: 0; font-size: 0.9rem; color: var(--dark); }
+        body.dark-mode .share-toast { background: #16213e; }
+        body.dark-mode .share-toast p { color: white; }
+
+        /* ===== RESPONSIVE TESTIMONIOS ===== */
+        @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">
+            <img src="logo-instalpon.jpeg" alt="INSTALPON" class="logo-img">
+            <span>INSTALPON</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#trabajos">Trabajos</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li>
+                <button class="theme-toggle-nav" id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </li>
+            <li class="mini-cart-wrap">
+                <button class="cart-btn" onclick="toggleMiniCart(event)">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Carrito</span>
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+                <div class="mini-cart-dropdown" id="miniCartDropdown">
+                    <div class="mini-cart-header">
+                        <h4><i class="fas fa-shopping-bag" style="margin-right:0.4rem;color:var(--primary);"></i>Tu Carrito</h4>
+                        <span id="miniCartCount">0 items</span>
+                    </div>
+                    <div class="mini-cart-items" id="miniCartItems">
+                        <div class="mini-cart-empty">
+                            <i class="fas fa-shopping-basket"></i>
+                            <p>Tu carrito está vacío</p>
+                        </div>
+                    </div>
+                    <div class="mini-cart-footer">
+                        <div class="mini-cart-total">
+                            <span>Total</span>
+                            <span id="miniCartTotal">$0</span>
+                        </div>
+                        <button class="mini-cart-btn" onclick="openFullCart()">
+                            <i class="fas fa-expand-alt" style="margin-right:0.4rem;"></i>Ver carrito completo
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-badge" id="cartCountMobile" style="position:absolute;top:-5px;right:-5px;background:var(--secondary);color:white;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:bold;">0</span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="hero-content reveal">
+            <div class="hero-badge">🏗️ Más de 30 años de experiencia</div>
+            <h1>Soluciones Constructivas <span>INSTALPON</span></h1>
+            <p>Desde 1993 entregamos soluciones constructivas para las áreas residenciales, comerciales e industriales de la región IX, XIV, X y XI del sur de Chile.</p>
+        </div>
+    </section>
+
+    <!-- ===== HISTORIA ===== -->
+    <section class="history reveal" id="historia">
+        <div>
+            <h2>Nuestra <span>Historia</span></h2>
+            <p>INSTALPON es una empresa dedicada desde <span class="highlight">1993</span> a entregar soluciones constructivas para las áreas residenciales, comerciales e industriales de la región IX, XIV, X y XI del sur de Chile.</p>
+            <p>Hemos aprendido mucho con los materiales, sus oportunas y adecuadas formas de instalación, las cuales hemos puesto continuamente en práctica y con ello vuelto a aprender, traspasando siempre esta información a nuestros clientes.</p>
+            <p>Con esa premisa hemos mancomunado esfuerzos con <span class="highlight">arquitectos, constructores y otros profesionales</span>, de forma de apoyarlos en la elección, especificación y el correcto y completo detalle de su aplicación.</p>
+
+            <div class="history-features">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-hard-hat"></i></div>
+                    <div>
+                        <strong>+30 Años</strong>
+                        <p style="margin:0; font-size:0.9rem; color:#a1a1a1;">De trayectoria</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                    <div>
+                        <strong>Profesionales</strong>
+                        <p style="margin:0; font-size:0.9rem; color:#a1a1a1;">Alianzas estratégicas</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <div>
+                        <strong>Calidad</strong>
+                        <p style="margin:0; font-size:0.9rem; color:#a1a1a1;">Materiales certificados</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <strong>Asesoría</strong>
+                        <p style="margin:0; font-size:0.9rem; color:#a1a1a1;">Atención personalizada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="history-img">
+            <img src="logo-instalpon.jpeg" alt="INSTALPON" style="width:100%;max-width:300px;border-radius:16px;opacity:0.9;">
+        </div>
+    </section>
+
+    <!-- ===== TRABAJOS REALIZADOS - GALERÍA INTERACTIVA ===== -->
+    <section class="works reveal" id="trabajos">
+        <h2 class="section-title">Trabajos Realizados</h2>
+        <p class="section-subtitle">Algunos de nuestros proyectos en el sur de Chile</p>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-counter" id="lightboxCounter">1 / 8</div>
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
+        <img src="" alt="" class="lightbox-img" id="lightboxImg">
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-caption" id="lightboxCaption">
+            <h4></h4>
+            <p></p>
+        </div>
+    </div>
+
+    <!-- ===== TESTIMONIOS ===== -->
+    <section class="section reveal" id="testimonios">
+        <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+        <p class="section-subtitle">Experiencias reales de quienes confían en INSTALPON</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal-delay-1">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Excelente atención y asesoría técnica. Los materiales de techumbre que compré fueron de primera calidad y el envío a Puerto Montt fue puntual."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div><strong>Carlos M.</strong><span>Constructor · Puerto Montt</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-delay-2">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-text">"Llevo 5 años comprando en INSTALPON. Su stock de aislamiento térmico es el más completo de la región. Recomendados al 100%."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div><strong>María R.</strong><span>Arquitecta · Valdivia</span></div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal-delay-3">
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"El sistema de cotización online me ahorró mucho tiempo. Recibí el presupuesto por WhatsApp en minutos y el pedido llegó perfecto a Castro."</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar"><i class="fas fa-user"></i></div>
+                    <div><strong>Juan P.</strong><span>Empresario · Chiloé</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INFO BAR ===== -->
+    <div class="info-bar">
+        <span><i class="fas fa-truck"></i> Envíos a todo el sur</span>
+        <span><i class="fas fa-shield-alt"></i> Garantía de calidad</span>
+        <span><i class="fas fa-phone"></i> +56 9 9997 8566</span>
+    </div>
+
+    <!-- ===== FILTROS TIENDA ===== -->
+    <div class="filters">
+        <div class="filters-container" id="filtersContainer">
+            <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('Techumbres')">Techumbres</button>
+            <button class="filter-btn" onclick="filterProducts('Revestimientos')">Revestimientos</button>
+            <button class="filter-btn" onclick="filterProducts('Aislamiento')">Aislamiento</button>
+            <button class="filter-btn" onclick="filterProducts('Tabiquería')">Tabiquería</button>
+            <button class="filter-btn" onclick="filterProducts('Impermeabilización')">Impermeabilización</button>
+            <button class="filter-btn" onclick="filterProducts('Pisos')">Pisos</button>
+            <button class="filter-btn" onclick="filterProducts('Herramientas')">Herramientas</button>
+        </div>
+    </div>
+
+    <!-- ===== PRODUCTOS ===== -->
+    <section class="section reveal" id="productos">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." oninput="searchProducts(this.value)">
+            <button class="clear-search" id="clearSearch" onclick="clearSearch()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="products-header">
+            <div class="products-header-left">
+                <h2 class="section-title">Catálogo de Productos</h2>
+                <p class="section-subtitle" id="productCount">50 productos disponibles</p>
+            </div>
+            <div class="products-header-right">
+                <span class="pagination-info" id="paginationInfo"></span>
+                <div class="pagination" id="pagination"></div>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- ===== CONTACTO / MAPA ===== -->
+    <section class="section reveal" id="contacto" style="padding-top:4rem;">
+        <h2 class="section-title">Visítanos en Puerto Montt</h2>
+        <p class="section-subtitle">Estamos aquí para ayudarte con tu compra</p>
+
+        <div class="contact-section">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <strong>Dirección</strong>
+                        <p style="margin:0; color:var(--gray);">Calle Panamericana Nte. 528, Puerto Montt, Los Lagos</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <div>
+                        <strong>Teléfono</strong>
+                        <p style="margin:0; color:var(--gray);">+56 9 9997 8566</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <strong>Correo Electrónico</strong>
+                        <p style="margin:0; color:var(--gray);">contactos@instalpon.cl</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <strong>Horario de Atención</strong>
+                        <p style="margin:0; color:var(--gray);">Lun - Vie: 8:30 - 18:00 hrs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3112.0!2d-72.94!3d-41.47!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zQ2FsbGUgUGFuYW1lcmljYW5hIE50ZS4gNTI4LCBQdWVydG8gTW9udHQ!5e0!3m2!1ses!2scl!4v1600000000000" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-brand">
+            <img src="logo-instalpon.jpeg" alt="INSTALPON" style="height:36px;width:auto;border-radius:6px;">
+            INSTALPON
+        </div>
+        <p>Tienda Online - Materiales de Construcción</p>
+        <div class="footer-contact">
+            <a href="tel:+56999978566"><i class="fas fa-phone"></i> +56 9 9997 8566</a>
+            <a href="mailto:contactos@instalpon.cl"><i class="fas fa-envelope"></i> contactos@instalpon.cl</a>
+        </div>
+        <p style="margin-top:1rem;font-size:0.85rem;">© 2025 INSTALPON. Todos los derechos reservados.</p>
+        <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Creado por fhollken · 2026</p>
+    </footer>
+
+    <!-- ===== CARRITO SIDEBAR ===== -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <p>Tu carrito está vacío</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">$0</span>
+            </div>
+            <div class="cart-total-row">
+                <span>Envío</span>
+                <span style="color:var(--primary);font-weight:600;">A cotizar</span>
+            </div>
+            <div class="cart-total-row total">
+                <span>Total</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <div class="cart-extra-actions">
+                <button onclick="printCart()"><i class="fas fa-print"></i> Imprimir</button>
+                <button onclick="shareCart()"><i class="fas fa-share-alt"></i> Compartir</button>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">
+                <i class="fab fa-whatsapp"></i> Finalizar Compra por WhatsApp
+            </button>
+            <p class="cart-note">Te contactaremos para confirmar stock y calcular envío.</p>
+        </div>
+    </div>
+
+    <!-- ===== WHATSAPP FLOTANTE (INTACTO) ===== -->
+    <a href="https://wa.me/56999978566?text=Hola%20INSTALPON!%20Vengo%20de%20la%20tienda%20online%20y%20tengo%20una%20consulta." 
+       class="whatsapp-float" 
+       target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">¡Escríbenos!</span>
+    </a>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        const galleryImages = [
+            { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=800&fit=crop", title: "Techumbre Industrial", desc: "Instalación de cubierta metálica trapezoidal en bodega comercial. Región de Los Lagos, 2023." },
+            { src: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&h=800&fit=crop", title: "Revestimiento Exterior", desc: "Siding de PVC y fibrocemento en conjunto residencial. Puerto Montt, 2022." },
+            { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&h=800&fit=crop", title: "Aislamiento Térmico", desc: "Colocación de lana de vidrio y barrera de vapor en vivienda unifamiliar. Región de Los Ríos, 2023." },
+            { src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop", title: "Impermeabilización", desc: "Manto asfáltico y membrana en terraza comercial. Castro, 2024." },
+            { src: "https://images.unsplash.com/photo-1518005068251-37900150dfca?w=1200&h=800&fit=crop", title: "Cubierta Metálica", desc: "Instalación completa de teja metálica con sistema de bajantes. Valdivia, 2023." },
+            { src: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=1200&h=800&fit=crop", title: "Tabiquería y Cielos", desc: "Construcción de tabiques divisorios y cielo raso en oficinas. Puerto Montt, 2024." },
+            { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop", title: "Piso Flotante", desc: "Instalación de piso laminado en vivienda residencial. Osorno, 2022." },
+            { src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&h=800&fit=crop", title: "Fachada Comercial", desc: "Revestimiento completo con sistema de aislamiento integrado. Región de Aysén, 2023." }
+        ];
+
+        let currentLightboxIndex = 0;
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = galleryImages.map((img, index) => `
+                <div class="gallery-item" onclick="openLightbox(${index})">
+                    <img src="${img.src}" alt="${img.title}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="zoom-icon"><i class="fas fa-search-plus"></i></div>
+                        <h4>${img.title}</h4>
+                        <p>${img.desc.substring(0, 40)}...</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            updateLightbox();
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox(event) {
+            if (event && event.target !== event.currentTarget) return;
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            const img = galleryImages[currentLightboxIndex];
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxImg').alt = img.title;
+            document.getElementById('lightboxCaption').querySelector('h4').textContent = img.title;
+            document.getElementById('lightboxCaption').querySelector('p').textContent = img.desc;
+            document.getElementById('lightboxCounter').textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            if (currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if (currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+            updateLightbox();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+
+        const products = [
+            { id: 1, name: "Teja Asfáltica Cambridge", category: "Techumbres", price: 28500, img: "https://images.unsplash.com/photo-1518005068251-37900150dfca?w=400&h=300&fit=crop", desc: "Teja asfáltica de alta resistencia. 3,1 m² por paquete. Color negro.", tag: "Más vendido" },
+            { id: 2, name: "Teja de Fibrocemento Ondulada", category: "Techumbres", price: 12400, img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop", desc: "Placa ondulada 1,22x1,10m. Espesor 5mm. Resistente a UV.", tag: null },
+            { id: 3, name: "Teja Metálica Trapezoidal", category: "Techumbres", price: 18900, img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop", desc: "Galvanizada prepintada. Largo 3m. Color rojo o verde.", tag: null },
+            { id: 4, name: "Teja de Arcilla Española", category: "Techumbres", price: 45000, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop", desc: "Teja cerámica curva tradicional. 10 unidades por m². Alta durabilidad.", tag: "Premium" },
+            { id: 5, name: "Membrana Asfáltica 3mm", category: "Techumbres", price: 22000, img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop", desc: "Rollo 1x10m. Con aluminio. Ideal para techos planos.", tag: null },
+            { id: 6, name: "Cumbrera Universal Metálica", category: "Techumbres", price: 8500, img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop", desc: "Cumbrera ajustable para teja metálica. Largo 2m.", tag: null },
+            { id: 7, name: "Bajante PVC 80mm x 3m", category: "Techumbres", price: 6500, img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=400&h=300&fit=crop", desc: "Tubo bajante PVC con campana. Color blanco.", tag: null },
+            { id: 8, name: "Kit de Fijación Teja Asfáltica", category: "Techumbres", price: 15000, img: "https://images.unsplash.com/photo-1541976590-713941681591?w=400&h=300&fit=crop", desc: "Clavos, sellador y lamina de inicio. Cubre 20 m².", tag: "Kit" },
+            { id: 9, name: "Siding de PVC Blanco", category: "Revestimientos", price: 16500, img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop", desc: "Tabla de revestimiento exterior. 3,80m x 0,23m. Textura madera.", tag: null },
+            { id: 10, name: "Placa de Fibrocemento 8mm", category: "Revestimientos", price: 32000, img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop", desc: "Placa lisa 1,22x2,44m. Para fachadas y cielos. Color blanco.", tag: null },
+            { id: 11, name: "Revestimiento Piedra Cultivada", category: "Revestimientos", price: 48000, img: "https://images.unsplash.com/photo-1600585154526-816d8f3b0ab9?w=400&h=300&fit=crop", desc: "Panel decorativo imitación piedra. 0,45x1m. Adhesivo incluido.", tag: "Decorativo" },
+            { id: 12, name: "Malla de Yeso Exterior", category: "Revestimientos", price: 18500, img: "https://images.unsplash.com/photo-1600566752355-3578b7a7b7b7?w=400&h=300&fit=crop", desc: "Malla de fibra de vidrio para base de revestimiento. Rollo 50m².", tag: null },
+            { id: 13, name: "Pintura Látex Fachada 20L", category: "Revestimientos", price: 55000, img: "https://images.unsplash.com/photo-1600047509358-138a847c19f4?w=400&h=300&fit=crop", desc: "Pintura acrílica impermeable. Alto poder cubriente. Color blanco.", tag: null },
+            { id: 14, name: "Guardavivos de Aluminio", category: "Revestimientos", price: 4200, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop", desc: "Perfil de esquina para exterior. 3m de largo. Anodizado.", tag: null },
+            { id: 15, name: "Sellador Acrílico 5L", category: "Revestimientos", price: 28000, img: "https://images.unsplash.com/photo-1600585154526-816d8f3b0ab9?w=400&h=300&fit=crop", desc: "Base sellante para fachadas. Transparente. Rinde 40 m².", tag: null },
+            { id: 16, name: "Placa Cementicia 12mm", category: "Revestimientos", price: 38500, img: "https://images.unsplash.com/photo-1600566752355-3578b7a7b7b7?w=400&h=300&fit=crop", desc: "Placa reforzada para exterior. 1,22x2,44m. Resistente a impactos.", tag: null },
+            { id: 17, name: "Lana de Vidrio 100mm", category: "Aislamiento", price: 22000, img: "https://images.unsplash.com/photo-1600607687644-9e8c0c3c2a0e?w=400&h=300&fit=crop", desc: "Rollo 1,2x10m. Densidad 14kg/m³. Para techos y paredes.", tag: "Térmico" },
+            { id: 18, name: "Lana de Roca 50mm", category: "Aislamiento", price: 18500, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop", desc: "Panel ignífugo. 1x0,6m. Ideal para tabiques y cielos.", tag: "Ignífugo" },
+            { id: 19, name: "Poliestireno Expandido 50mm", category: "Aislamiento", price: 14500, img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop", desc: "Placa EPS 1x1m. Densidad 15kg/m³. Aislante térmico.", tag: null },
+            { id: 20, name: "Poliuretano Proyectado", category: "Aislamiento", price: 85000, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop", desc: "Kit 2 componentes. Rinde 10 m² a 50mm. Espuma expansiva.", tag: "Profesional" },
+            { id: 21, name: "Aluminio Reflectivo Doble", category: "Aislamiento", price: 12000, img: "https://images.unsplash.com/photo-1600585154526-816d8f3b0ab9?w=400&h=300&fit=crop", desc: "Rollo 1,2x25m. Barrera de vapor y reflectivo. Para techos.", tag: null },
+            { id: 22, name: "Aislante Acústico 25mm", category: "Aislamiento", price: 16500, img: "https://images.unsplash.com/photo-1600566752355-3578b7a7b7b7?w=400&h=300&fit=crop", desc: "Panel acústico absorbente. 0,6x1,2m. Para estudios y paredes.", tag: "Acústico" },
+            { id: 23, name: "Manta de Fibra Cerámica", category: "Aislamiento", price: 35000, img: "https://images.unsplash.com/photo-1600047509358-138a847c19f4?w=400&h=300&fit=crop", desc: "Alta temperatura. 1x5m. Para chimeneas y calderas.", tag: "Industrial" },
+            { id: 24, name: "Espuma de Polietileno 10mm", category: "Aislamiento", price: 9500, img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop", desc: "Rollo 1x20m. Aislante de piso flotante y humedad.", tag: null },
+            { id: 25, name: "Placa de Yeso 12,5mm", category: "Tabiquería", price: 12500, img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop", desc: "Placa estándar 1,2x2,4m. Para tabiques y cielos. Color blanco.", tag: "Estándar" },
+            { id: 26, name: "Placa de Yeso Humedad", category: "Tabiquería", price: 18500, img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop", desc: "Placa verde anti-humedad. 1,2x2,4m. Para baños y cocinas.", tag: null },
+            { id: 27, name: "Placa de Yeso Ignífuga", category: "Tabiquería", price: 22000, img: "https://images.unsplash.com/photo-1541976590-713941681591?w=400&h=300&fit=crop", desc: "Placa roja resistente al fuego. 1,2x2,4m. 45 min protección.", tag: "Ignífuga" },
+            { id: 28, name: "Perfil Montante 70mm", category: "Tabiquería", price: 4500, img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop", desc: "Perfil de acero galvanizado. 3m de largo. Para tabiques.", tag: null },
+            { id: 29, name: "Perfil Solera 70mm", category: "Tabiquería", price: 4200, img: "https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?w=400&h=300&fit=crop", desc: "Perfil base para montante. 3m de largo. Galvanizado.", tag: null },
+            { id: 30, name: "Tornillo Autoperforante 32mm", category: "Tabiquería", price: 8500, img: "https://images.unsplash.com/photo-1518005068251-37900150dfca?w=400&h=300&fit=crop", desc: "Caja 500 unidades. Para fijar placa a perfil. Punta broca.", tag: null },
+            { id: 31, name: "Masilla para Juntas 25kg", category: "Tabiquería", price: 15500, img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop", desc: "Masilla lista para usar. Color blanco. Rinde 80 m².", tag: null },
+            { id: 32, name: "Cinta de Papel para Juntas", category: "Tabiquería", price: 6500, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop", desc: "Rollo 50m x 50mm. Refuerzo para juntas de placa de yeso.", tag: null },
+            { id: 33, name: "Impermeabilizante Acrílico 20L", category: "Impermeabilización", price: 65000, img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop", desc: "Base agua. Elástico. Rinde 30 m² por mano. Color blanco.", tag: "Premium" },
+            { id: 34, name: "Impermeabilizante Asfáltico 18L", category: "Impermeabilización", price: 48000, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop", desc: "Emulsión asfáltica. Para techos y terrazas. Rinde 25 m².", tag: null },
+            { id: 35, name: "Manto Asfáltico 4mm", category: "Impermeabilización", price: 35000, img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop", desc: "Rollo 1x10m. Con velo de poliéster. Autoadhesivo.", tag: "Autoadhesivo" },
+            { id: 36, name: "Cemento de Mampostería 25kg", category: "Impermeabilización", price: 8500, img: "https://images.unsplash.com/photo-1600585154526-816d8f3b0ab9?w=400&h=300&fit=crop", desc: "Cemento Portland. Para sellado y reparación. Alto rendimiento.", tag: null },
+            { id: 37, name: "Sellador de Poliuretano 600ml", category: "Impermeabilización", price: 12000, img: "https://images.unsplash.com/photo-1600566752355-3578b7a7b7b7?w=400&h=300&fit=crop", desc: "Cartucho sellador elástico. Para juntas y grietas. Color gris.", tag: null },
+            { id: 38, name: "Geomembrana HDPE 1mm", category: "Impermeabilización", price: 95000, img: "https://images.unsplash.com/photo-1600047509358-138a847c19f4?w=400&h=300&fit=crop", desc: "Rollo 2x20m. Para estanques y cubiertas. Alta resistencia.", tag: "Industrial" },
+            { id: 39, name: "Pintura Impermeable Terraza", category: "Impermeabilización", price: 72000, img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=400&h=300&fit=crop", desc: "Pintura de tráfico pesado. 20L. Resistente a pisoteo.", tag: null },
+            { id: 40, name: "Primer Asfáltico 10L", category: "Impermeabilización", price: 28000, img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop", desc: "Imprimación para manto asfáltico. Rinde 40 m².", tag: null },
+            { id: 41, name: "Piso Flotante 8mm Cerezo", category: "Pisos", price: 12500, img: "https://images.unsplash.com/photo-1600607687644-9e8c0c3c2a0e?w=400&h=300&fit=crop", desc: "Tabla 1,22x0,19m. Sistema click. Pack 2,5 m². Incluye zócalo.", tag: "Más vendido" },
+            { id: 42, name: "Piso Flotante 12mm Roble", category: "Pisos", price: 18500, img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop", desc: "Alta resistencia. 1,22x0,19m. Pack 2,5 m². Garantía 15 años.", tag: "Premium" },
+            { id: 43, name: "Cerámica 45x45 Beige", category: "Pisos", price: 16500, img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop", desc: "Porcelanato esmaltado. 2 m² por caja. Alto tráfico.", tag: null },
+            { id: 44, name: "Cerámica 60x60 Gris", category: "Pisos", price: 22000, img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop", desc: "Porcelanato rectificado. 1,8 m² por caja. Efecto cemento.", tag: "Moderno" },
+            { id: 45, name: "Pegamento para Cerámica 25kg", category: "Pisos", price: 14500, img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop", desc: "Adhesivo cementicio. Flexibilidad mejorada. Rinde 6 m².", tag: null },
+            { id: 46, name: "Pastina Antihongos 5kg", category: "Pisos", price: 8500, img: "https://images.unsplash.com/photo-1600585154526-816d8f3b0ab9?w=400&h=300&fit=crop", desc: "Color gris. Impermeable. Para juntas de 2-5mm.", tag: null },
+            { id: 47, name: "Atornillador Eléctrico 12V", category: "Herramientas", price: 45000, img: "https://images.unsplash.com/photo-1590642916586-149e72f8aadd?w=400&h=300&fit=crop", desc: "Inalámbrico. 2 baterías. Ideal para tabiquería y techumbres.", tag: "Oferta" },
+            { id: 48, name: "Cinta Métrica 8m Profesional", category: "Herramientas", price: 12000, img: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=400&h=300&fit=crop", desc: "Cinta de acero con freno. Resistente a golpes. Clip para cinturón.", tag: null },
+            { id: 49, name: "Nivel Láser Autonivelante", category: "Herramientas", price: 55000, img: "https://images.unsplash.com/photo-1600566752355-3578b7a7b7b7?w=400&h=300&fit=crop", desc: "Alcance 30m. Con trípode. Para albañilería y tabiquería.", tag: "Profesional" },
+            { id: 50, name: "Guantes de Trabajo Reforzados", category: "Herramientas", price: 6500, img: "https://images.unsplash.com/photo-1600047509358-138a847c19f4?w=400&h=300&fit=crop", desc: "Par de guantes de cuero y nylon. Antideslizantes. Talla única.", tag: null }
+        ];
+
+        // ===== DATOS DE FICHA TÉCNICA =====
+        const productSpecs = {
+            1:{'Marca':'Cambridge','Origen':'USA','Garantía':'25 años','Peso':'12 kg/paquete','Rendimiento':'3,1 m²'},
+            2:{'Marca':'Eternit','Origen':'Chile','Garantía':'10 años','Peso':'8,5 kg/placa','Rendimiento':'1,34 m²'},
+            3:{'Marca':'Galvateja','Origen':'Chile','Garantía':'15 años','Peso':'3,2 kg/m','Rendimiento':'0,84 m²/m'},
+            4:{'Marca':'Tejas Borja','Origen':'España','Garantía':'50 años','Peso':'2,8 kg/unidad','Rendimiento':'10 un/m²'},
+            5:{'Marca':'Mapei','Origen':'Italia','Garantía':'10 años','Peso':'25 kg/rollo','Rendimiento':'10 m²'},
+            17:{'Marca':'Isover','Origen':'Chile','Garantía':'10 años','Peso':'3,5 kg/m²','Rendimiento':'12 m²/rollo'},
+            25:{'Marca':'Placo','Origen':'Chile','Garantía':'5 años','Peso':'8,5 kg/placa','Rendimiento':'2,88 m²'},
+            33:{'Marca':'Sika','Origen':'Suiza','Garantía':'10 años','Peso':'18 kg/balde','Rendimiento':'30 m²'},
+            41:{'Marca':'Kaindl','Origen':'Austria','Garantía':'20 años','Peso':'7,5 kg/m²','Rendimiento':'2,5 m²/pack'},
+            47:{'Marca':'Makita','Origen':'Japón','Garantía':'1 año','Peso':'1,2 kg','Rendimiento':'N/A'}
+        };
+        function getProductSpecs(productId) {
+            return productSpecs[productId] || {'Categoría':'Construcción','Origen':'Chile','Garantía':'Consultar','Stock':'Disponible','Envío':'A todo el sur'};
+        }
+        function renderProductDetails(productId) {
+            const specs = getProductSpecs(productId);
+            return Object.entries(specs).map(([key,val])=>`<li><span>${key}</span><span>${val}</span></li>`).join('');
+        }
+
+        // ===== FICHA TÉCNICA DESPLEGABLE =====
+        function toggleProductDetails(productId, event) {
+            if (event) event.stopPropagation();
+            const panel = document.getElementById('details-' + productId);
+            const btn = document.getElementById('details-btn-' + productId);
+            if (panel && btn) {
+                panel.classList.toggle('open');
+                btn.classList.toggle('active');
+            }
+        }
+
+
+        let cart = [];
+        let currentFilter = 'todos';
+        const ITEMS_PER_PAGE = 12;
+        let currentPage = 1;
+        let currentFiltered = [];
+
+        function formatPrice(price) {
+            return '$' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function renderProducts(filter = 'todos', page = 1) {
+            currentFilter = filter;
+            currentPage = page;
+            const grid = document.getElementById('productsGrid');
+            currentFiltered = filter === 'todos' ? [...products] : products.filter(p => p.category === filter);
+
+            const totalItems = currentFiltered.length;
+            const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageItems = currentFiltered.slice(start, end);
+
+            document.getElementById('productCount').textContent = `${totalItems} productos disponibles`;
+
+            grid.innerHTML = pageItems.map(p => `
+                <div class="product-card">
+                    <div class="product-img-wrap">
+                        <img src="${p.img}" class="product-img" alt="${p.name}" loading="lazy">
+                        ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${p.category}</div>
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="product-footer">
+                            <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                            <button class="btn-add-cart" onclick="addToCart(${p.id})">
+                                <i class="fas fa-cart-plus"></i> Agregar
+                            </button>
+                        </div>
+                        <button class="product-details-btn" id="details-btn-${p.id}" onclick="toggleProductDetails(${p.id}, event)">
+                            <i class="fas fa-chevron-down"></i> Ver ficha técnica
+                        </button>
+                        <div class="product-details-panel" id="details-${p.id}">
+                            <ul>${renderProductDetails(p.id)}</ul>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            renderPagination(totalPages, totalItems);
+        }
+
+        function renderPagination(totalPages, totalItems) {
+            const pagination = document.getElementById('pagination');
+            const info = document.getElementById('paginationInfo');
+            if (!pagination) return;
+            if (totalPages <= 1) { pagination.innerHTML = ''; if (info) info.textContent = ''; return; }
+
+            let h = '';
+            h += `<button class="nav" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}><i class="fas fa-chevron-left"></i></button>`;
+
+            if (currentPage > 3) {
+                h += `<button onclick="changePage(1)">1</button>`;
+                if (currentPage > 4) h += `<span>...</span>`;
+            }
+            for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+                h += `<button class="${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+            }
+            if (currentPage < totalPages - 2) {
+                if (currentPage < totalPages - 3) h += `<span>...</span>`;
+                h += `<button onclick="changePage(${totalPages})">${totalPages}</button>`;
+            }
+            h += `<button class="nav" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}><i class="fas fa-chevron-right"></i></button>`;
+
+            pagination.innerHTML = h;
+            if (info) {
+                const start = (currentPage - 1) * ITEMS_PER_PAGE + 1;
+                const end = Math.min(currentPage * ITEMS_PER_PAGE, totalItems);
+                info.textContent = `${start}-${end} de ${totalItems}`;
+            }
+        }
+
+        function changePage(page) {
+            const totalPages = Math.ceil(currentFiltered.length / ITEMS_PER_PAGE);
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderProducts(currentFilter, currentPage);
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function filterProducts(category) {
+            currentFilter = category;
+            currentPage = 1;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(category === 'todos' ? 'Todos' : category)) btn.classList.add('active');
+            });
+            renderProducts(category, 1);
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            if (existing) { existing.quantity++; } else { cart.push({ ...product, quantity: 1 }); }
+            updateCart(); saveCart();
+            showProductToast(product);
+            animateCartBadge();
+            updateMiniCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartCountMobile = document.getElementById('cartCountMobile');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartCount.textContent = totalItems;
+            if (cartCountMobile) cartCountMobile.textContent = totalItems;
+            cartSubtotal.textContent = formatPrice(totalPrice);
+            cartTotal.textContent = formatPrice(totalPrice);
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Tu carrito está vacío</p>
+                        <a href="#productos" onclick="toggleCart()" style="color:var(--primary);text-decoration:none;margin-top:1rem;display:inline-block;font-weight:600;">Ver productos →</a>
+                    </div>`;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.img}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-price">${formatPrice(item.price)} c/u</div>
+                            <div class="cart-item-controls">
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
+                                <span style="font-weight:700;min-width:24px;text-align:center;">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <span class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) removeFromCart(productId);
+                else { updateCart(); saveCart(); updateMiniCart(); }
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+            saveCart();
+            updateMiniCart();
+        }
+
+        function toggleCart(forceOpen = false) {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            const isOpen = sidebar.classList.contains('open');
+            if (forceOpen || !isOpen) {
+                sidebar.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function checkout() {
+            if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemsList = cart.map(item => `• ${item.name} x${item.quantity} = ${formatPrice(item.price * item.quantity)}`).join('%0A');
+            const phone = '56999978566';
+            const message = `¡Hola INSTALPON! 👋%0A%0AQuiero realizar el siguiente pedido desde la tienda online:%0A%0A${itemsList}%0A%0A*Total: ${formatPrice(totalPrice)}*%0A%0AMi nombre: ___________%0ADirección de envío: ___________%0A%0AQuedo atento a confirmación de stock y costo de envío. ¡Gracias!`;
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+
+        
+        // ===== LOCALSTORAGE CARRITO =====
+        const CART_KEY = 'instalpon_cart';
+        let savedCart = null;
+
+        function saveCart() {
+            localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            try {
+                const data = localStorage.getItem(CART_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    if (parsed && parsed.length > 0) {
+                        cart = parsed.map(item => ({...item}));
+                        updateCart();
+                        showRestoreToast();
+                    }
+                }
+            } catch (e) { 
+                console.error('Error cargando carrito desde localStorage:', e);
+                localStorage.removeItem(CART_KEY);
+            }
+        }
+
+        function showRestoreToast() {
+            const toast = document.getElementById('restoreToast');
+            if (toast) toast.classList.add('show');
+        }
+
+        function dismissRestore() {
+            const toast = document.getElementById('restoreToast');
+            if (toast) toast.classList.remove('show');
+            savedCart = null;
+        }
+
+        function confirmRestore() {
+            dismissRestore();
+        }
+
+        // ===== BÚSQUEDA DE PRODUCTOS =====
+        function searchProducts(query) {
+            const clearBtn = document.getElementById('clearSearch');
+            if (clearBtn) {
+                if (query.trim().length > 0) clearBtn.classList.add('visible');
+                else clearBtn.classList.remove('visible');
+            }
+
+            const term = query.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            if (!term) {
+                currentPage = 1;
+                renderProducts(currentFilter, 1);
+                return;
+            }
+
+            const filtered = products.filter(p => {
+                const name = p.name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+                const cat = p.category.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+                const desc = p.desc.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+                return name.includes(term) || cat.includes(term) || desc.includes(term);
+            });
+
+            document.getElementById('productCount').textContent = `${filtered.length} resultado${filtered.length !== 1 ? 's' : ''} para "${query.trim()}"`;
+            const grid = document.getElementById('productsGrid');
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray);"><i class="fas fa-search" style="font-size:3rem;opacity:.3;margin-bottom:1rem;display:block;"></i><p>No encontramos productos para "<strong>${query.trim()}</strong>"</p><button onclick="clearSearch()" style="margin-top:1rem;padding:.6rem 1.2rem;background:var(--primary);color:white;border:none;border-radius:8px;cursor:pointer;font-weight:600;">Ver todos los productos</button></div>`;
+            } else {
+                grid.innerHTML = filtered.map(p => `
+                    <div class="product-card">
+                        <div class="product-img-wrap">
+                            <img src="${p.img}" class="product-img" alt="${p.name}" loading="lazy">
+                            ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${p.category}</div>
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-desc">${p.desc}</div>
+                            <div class="product-footer">
+                                <div class="product-price">${formatPrice(p.price)} <span>CLP</span></div>
+                                <button class="btn-add-cart" onclick="addToCart(${p.id})">
+                                    <i class="fas fa-cart-plus"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            if (input) { input.value = ''; }
+            const clearBtn = document.getElementById('clearSearch');
+            if (clearBtn) clearBtn.classList.remove('visible');
+            currentPage = 1;
+            renderProducts(currentFilter, 1);
+        }
+
+                
+        // ===== ANIMACIONES DE ENTRADA (SCROLL REVEAL) =====
+        function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Revelar elementos hijos con delay escalonado
+                        const children = entry.target.querySelectorAll('.product-card, .gallery-item, .feature-item, .contact-item');
+                        children.forEach((child, i) => {
+                            child.classList.add('reveal');
+                            child.classList.add(`reveal-delay-${Math.min(i + 1, 6)}`);
+                            setTimeout(() => child.classList.add('visible'), 100 * i);
+                        });
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+        }
+
+        // ===== SKELETON LOADERS PARA IMÁGENES =====
+        function initSkeletonLoaders() {
+            const images = document.querySelectorAll('.product-img, .gallery-item img');
+            images.forEach(img => {
+                img.classList.add('skeleton-loading');
+                img.addEventListener('load', () => {
+                    img.classList.remove('skeleton-loading');
+                    img.classList.add('loaded');
+                });
+                img.addEventListener('error', () => {
+                    img.classList.remove('skeleton-loading');
+                    img.style.background = '#f0f0f0';
+                });
+            });
+        }
+
+        // ===== MODO OSCURO =====
+        const THEME_KEY = 'instalpon_theme';
+
+        function initTheme() {
+            const saved = localStorage.getItem(THEME_KEY);
+            if (saved === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon(true);
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+            updateThemeIcon(isDark);
+        }
+
+        function updateThemeIcon(isDark) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            }
+        }
+
+
+        initTheme();
+        loadCart();
+        updateMiniCart();
+        
+        // ===== MINI-CARRITO =====
+        function toggleMiniCart(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('miniCartDropdown');
+            const isOpen = dropdown.classList.contains('show');
+            closeAllDropdowns();
+            if (!isOpen) {
+                dropdown.classList.add('show');
+                updateMiniCart();
+            }
+        }
+
+        function closeAllDropdowns() {
+            const dropdown = document.getElementById('miniCartDropdown');
+            if (dropdown) dropdown.classList.remove('show');
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrap = document.querySelector('.mini-cart-wrap');
+            if (wrap && !wrap.contains(e.target)) closeAllDropdowns();
+        });
+
+        function updateMiniCart() {
+            const itemsDiv = document.getElementById('miniCartItems');
+            const countSpan = document.getElementById('miniCartCount');
+            const totalSpan = document.getElementById('miniCartTotal');
+            if (!itemsDiv) return;
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            if (countSpan) countSpan.textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
+            if (totalSpan) totalSpan.textContent = formatPrice(totalPrice);
+
+            if (cart.length === 0) {
+                itemsDiv.innerHTML = `
+                    <div class="mini-cart-empty">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Tu carrito está vacío</p>
+                    </div>`;
+            } else {
+                itemsDiv.innerHTML = cart.map(item => `
+                    <div class="mini-cart-item">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="mini-cart-item-info">
+                            <div class="mini-cart-item-name">${item.name}</div>
+                            <div class="mini-cart-item-qty">${item.quantity} x ${formatPrice(item.price)}</div>
+                        </div>
+                        <div class="mini-cart-item-price">${formatPrice(item.price * item.quantity)}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function openFullCart() {
+            closeAllDropdowns();
+            toggleCart(true);
+        }
+
+        // ===== TOAST PRODUCTO AGREGADO =====
+        let toastTimeout;
+        function showProductToast(product) {
+            const toast = document.getElementById('productToast');
+            const img = document.getElementById('productToastImg');
+            const name = document.getElementById('productToastName');
+            if (!toast || !img || !name) return;
+
+            img.src = product.img;
+            img.alt = product.name;
+            name.textContent = product.name;
+
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(hideProductToast, 3000);
+        }
+
+        function hideProductToast() {
+            const toast = document.getElementById('productToast');
+            if (toast) toast.classList.remove('show');
+        }
+
+        // ===== CONTADOR ANIMADO =====
+        function animateCartBadge() {
+            const badge = document.getElementById('cartCount');
+            const mobileBadge = document.getElementById('cartCountMobile');
+            if (badge) {
+                badge.classList.remove('animate');
+                void badge.offsetWidth; // trigger reflow
+                badge.classList.add('animate');
+            }
+            if (mobileBadge) {
+                mobileBadge.classList.remove('animate');
+                void mobileBadge.offsetWidth;
+                mobileBadge.classList.add('animate');
+            }
+        }
+
+
+        
+        initScrollReveal();
+        initSkeletonLoaders();
+        
+        // ===== BOTÓN VOLVER ARRIBA =====
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTop');
+            if (!btn) return;
+            if (window.scrollY > 400) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+        });
+
+        renderGallery();
+        renderProducts();
+
+        // ===== PWA - SERVICE WORKER =====
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('SW registrado:', registration.scope))
+                    .catch(error => console.log('SW error:', error));
+            });
+        }
+
+        // ===== IMPRIMIR / PDF CARRITO =====
+        function printCart() {
+            if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const printContent = `<html><head><title>Cotización INSTALPON</title><style>
+                body{font-family:Arial,sans-serif;padding:40px;max-width:600px;margin:0 auto}
+                h1{color:#e85d04;border-bottom:3px solid #e85d04;padding-bottom:10px}
+                .logo{text-align:center;margin-bottom:20px}
+                .logo img{max-width:120px;height:auto;border-radius:8px}
+                .item{padding:12px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
+                .total{font-size:1.3rem;font-weight:bold;color:#e85d04;margin-top:20px;padding-top:20px;border-top:2px solid #e85d04}
+                .footer{margin-top:40px;font-size:0.85rem;color:#666;text-align:center}
+                .date{color:#999;font-size:0.9rem;margin-bottom:20px}
+                </style></head><body>
+                <div class="logo"><img src="logo-instalpon.jpeg" alt="INSTALPON Logo"><h1>INSTALPON</h1></div>
+                <p class="date">Cotización generada el ${new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}</p>
+                <h2>Detalle de Productos</h2>
+                ${cart.map(item=>`<div class="item"><span>${item.name} x${item.quantity}</span><span>${formatPrice(item.price*item.quantity)}</span></div>`).join('')}
+                <div class="total">Total: ${formatPrice(totalPrice)}</div>
+                <div class="footer"><p><strong>INSTALPON</strong> - Materiales de Construcción</p>
+                <p>Calle Panamericana Nte. 528, Puerto Montt</p>
+                <p>Tel: +56 9 9997 8566 | contactos@instalpon.cl</p>
+                <p style="margin-top:15px;color:#e85d04;font-weight:bold;">Esta cotización tiene validez de 7 días hábiles.</p>
+                <p>Para confirmar stock y costo de envío, contáctanos por WhatsApp.</p></div>
+                </body></html>`;
+            const printWindow = window.open('','_blank');
+            printWindow.document.write(printContent);
+            printWindow.document.close();
+            setTimeout(()=>{printWindow.print();},500);
+        }
+
+        // ===== COMPARTIR CARRITO =====
+        function shareCart() {
+            if (cart.length === 0) { alert('Tu carrito está vacío.'); return; }
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const itemsList = cart.map(item => `• ${item.name} x${item.quantity} = ${formatPrice(item.price * item.quantity)}`).join('\n');
+            const shareText = `🛒 Pedido INSTALPON\n\n${itemsList}\n\n💰 Total: ${formatPrice(totalPrice)}\n\n📍 Puerto Montt, Chile\n📞 +56 9 9997 8566\n🌐 instalpon.cl`;
+            if (navigator.share) {
+                navigator.share({title:'Mi pedido INSTALPON',text:shareText}).catch(()=>copyCartToClipboard(shareText));
+            } else {
+                copyCartToClipboard(shareText);
+            }
+        }
+
+        function copyCartToClipboard(text) {
+            navigator.clipboard.writeText(text).then(()=>{
+                showShareToast('📋 Pedido copiado al portapapeles. ¡Pégalo donde quieras!');
+            }).catch(()=>{
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showShareToast('📋 Pedido copiado al portapapeles. ¡Pégalo donde quieras!');
+            });
+        }
+
+        function showShareToast(message) {
+            const toast = document.getElementById('shareToast');
+            const msg = document.getElementById('shareToastMsg');
+            if (toast && msg) {
+                msg.textContent = message;
+                toast.classList.add('show');
+                setTimeout(()=>toast.classList.remove('show'),3000);
+            }
+        }
+
+    </script>
+
+
+    <!-- ===== TOAST PRODUCTO AGREGADO ===== -->
+    <div class="product-toast" id="productToast">
+        <img src="" alt="" id="productToastImg">
+        <div class="product-toast-text">
+            <p><strong id="productToastName"></strong> agregado al carrito</p>
+        </div>
+        <button class="product-toast-close" onclick="hideProductToast()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <!-- ===== TOAST RESTAURAR CARRITO ===== -->
+    <div class="restore-toast" id="restoreToast">
+        <p>🛒 <strong>Carrito restaurado</strong> automáticamente de tu última visita.</p>
+        <div class="restore-actions">
+            <button class="btn-restore-no" onclick="dismissRestore()">Entendido</button>
+        </div>
+    </div>
+
+
+    <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ===== TOAST COMPARTIR ===== -->
+    <div class="share-toast" id="shareToast">
+        <i class="fas fa-check-circle"></i>
+        <p id="shareToastMsg">Pedido copiado al portapapeles</p>
+    </div>
+</body>
+</html>
