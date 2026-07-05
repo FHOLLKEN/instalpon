@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSTALPON | Tienda Online - Materiales de Construcción Puerto Montt</title>
     <meta name="description" content="Tienda online de INSTALPON. Materiales de construcción, cubiertas, revestimientos, aislamiento y más con envío a Regiones IX, XIV, X y XI.">
+
+    <!-- Open Graph / Facebook / WhatsApp / Instagram -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fhollken.github.io/instalpon/">
+    <meta property="og:title" content="INSTALPON | Tienda Online - Materiales de Construcción Puerto Montt">
+    <meta property="og:description" content="Materiales de construcción, cubiertas, revestimientos y aislamiento para el sur de Chile. Envío a Regiones IX, XIV, X y XI.">
+    <meta property="og:image" content="https://fhollken.github.io/instalpon/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_CL">
+    <meta property="og:site_name" content="INSTALPON">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="INSTALPON | Tienda Online - Materiales de Construcción Puerto Montt">
+    <meta name="twitter:description" content="Materiales de construcción, cubiertas, revestimientos y aislamiento para el sur de Chile.">
+    <meta name="twitter:image" content="https://fhollken.github.io/instalpon/og-image.jpg">
+
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#e85d04">
@@ -12,7 +30,49 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="INSTALPON">
     <link rel="apple-touch-icon" href="logo-instalpon.jpeg">
+    <link rel="icon" type="image/jpeg" href="logo-instalpon.jpeg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Datos estructurados Schema.org para SEO local -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HardwareStore",
+      "name": "INSTALPON",
+      "image": "https://fhollken.github.io/instalpon/og-image.jpg",
+      "logo": "https://fhollken.github.io/instalpon/logo-instalpon.jpeg",
+      "url": "https://fhollken.github.io/instalpon/",
+      "telephone": "+56999978566",
+      "email": "contactos@instalpon.cl",
+      "description": "Materiales de construcción, cubiertas, revestimientos y aislamiento para el sur de Chile.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Panamericana Nte. 528",
+        "addressLocality": "Puerto Montt",
+        "addressRegion": "Los Lagos",
+        "addressCountry": "CL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -41.47,
+        "longitude": -72.94
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:30",
+        "closes": "18:00"
+      },
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Región de La Araucanía" },
+        { "@type": "AdministrativeArea", "name": "Región de Los Ríos" },
+        { "@type": "AdministrativeArea", "name": "Región de Los Lagos" },
+        { "@type": "AdministrativeArea", "name": "Región de Aysén" }
+      ],
+      "priceRange": "$$"
+    }
+    </script>
+
     <style>
         :root {
             --primary: #e85d04;
@@ -1684,12 +1744,12 @@
             <li><a href="#productos">Productos</a></li>
             <li><a href="#contacto">Contacto</a></li>
             <li>
-                <button class="theme-toggle-nav" id="themeToggle" onclick="toggleTheme()" title="Cambiar tema">
+                <button class="theme-toggle-nav" id="themeToggle" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar entre modo claro y oscuro">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
             </li>
             <li class="mini-cart-wrap">
-                <button class="cart-btn" onclick="toggleMiniCart(event)">
+                <button class="cart-btn" onclick="toggleMiniCart(event)" aria-label="Ver mini carrito de compras">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Carrito</span>
                     <span class="cart-badge" id="cartCount">0</span>
@@ -1717,7 +1777,7 @@
                 </div>
             </li>
         </ul>
-        <div class="menu-toggle" onclick="toggleCart()">
+        <div class="menu-toggle" onclick="toggleCart()" role="button" tabindex="0" aria-label="Abrir carrito de compras" onkeydown="if(event.key==='Enter'||event.key===' ')toggleCart()">
             <i class="fas fa-shopping-cart"></i>
             <span class="cart-badge" id="cartCountMobile" style="position:absolute;top:-5px;right:-5px;background:var(--secondary);color:white;border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:bold;">0</span>
         </div>
@@ -1787,10 +1847,10 @@
     <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
         <div class="lightbox-counter" id="lightboxCounter">1 / 8</div>
-        <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)"><i class="fas fa-chevron-left"></i></button>
+        <button class="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar galería de imágenes"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)" aria-label="Imagen anterior"><i class="fas fa-chevron-left"></i></button>
         <img src="" alt="" class="lightbox-img" id="lightboxImg">
-        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)"><i class="fas fa-chevron-right"></i></button>
+        <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)" aria-label="Imagen siguiente"><i class="fas fa-chevron-right"></i></button>
         <div class="lightbox-caption" id="lightboxCaption">
             <h4></h4>
             <p></p>
@@ -1860,8 +1920,8 @@
     <section class="section reveal" id="productos">
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." oninput="searchProducts(this.value)">
-            <button class="clear-search" id="clearSearch" onclick="clearSearch()"><i class="fas fa-times"></i></button>
+            <input type="text" id="searchInput" placeholder="Buscar productos, categorías..." oninput="searchProducts(this.value)" aria-label="Buscar productos por nombre o categoría">
+            <button class="clear-search" id="clearSearch" onclick="clearSearch()" aria-label="Limpiar búsqueda"><i class="fas fa-times"></i></button>
         </div>
         <div class="products-header">
             <div class="products-header-left">
@@ -1948,7 +2008,7 @@
     <div class="cart-sidebar" id="cartSidebar">
         <div class="cart-header">
             <h3><i class="fas fa-shopping-cart"></i> Tu Carrito</h3>
-            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Cerrar carrito de compras"><i class="fas fa-times"></i></button>
         </div>
         <div class="cart-items" id="cartItems">
             <div class="cart-empty">
@@ -1987,7 +2047,9 @@
     <!-- ===== WHATSAPP FLOTANTE (INTACTO) ===== -->
     <a href="https://wa.me/56999978566?text=Hola%20INSTALPON!%20Vengo%20de%20la%20tienda%20online%20y%20tengo%20una%20consulta." 
        class="whatsapp-float" 
-       target="_blank">
+       target="_blank"
+       aria-label="Escríbenos por WhatsApp"
+       rel="noopener">
         <i class="fab fa-whatsapp"></i>
         <span class="whatsapp-tooltip">¡Escríbenos!</span>
     </a>
@@ -2718,7 +2780,7 @@
         <div class="product-toast-text">
             <p><strong id="productToastName"></strong> agregado al carrito</p>
         </div>
-        <button class="product-toast-close" onclick="hideProductToast()"><i class="fas fa-times"></i></button>
+        <button class="product-toast-close" onclick="hideProductToast()" aria-label="Cerrar notificación"><i class="fas fa-times"></i></button>
     </div>
 
     <!-- ===== TOAST RESTAURAR CARRITO ===== -->
@@ -2731,7 +2793,7 @@
 
 
     <!-- ===== BOTÓN VOLVER ARRIBA ===== -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Volver arriba">
         <i class="fas fa-arrow-up"></i>
     </button>
 
