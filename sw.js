@@ -4,17 +4,17 @@
 // IMPORTANTE: cada vez que subas cambios importantes al sitio
 // (nuevo catálogo, precios, textos, etc.), sube también este
 // archivo cambiando el número de CACHE_VERSION más abajo
-// (v3 -> v4 -> v5 ...). Eso obliga a todos los navegadores a
+// (v4 -> v5 -> v6 ...). Eso obliga a todos los navegadores a
 // descartar la copia vieja y traer la nueva automáticamente.
 // ============================================
 
-const CACHE_VERSION = 'v3'; // <-- sube este número en cada actualización importante
+const CACHE_VERSION = 'v4'; // <-- sube este número en cada actualización importante
 const CACHE_NAME = `instalpon-${CACHE_VERSION}`;
 
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/logo-instalpon.jpeg',
+  './',
+  './index.html',
+  './logo-instalpon.jpeg',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
