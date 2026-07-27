@@ -1735,18 +1735,78 @@
 
         /* ===== RESPONSIVE TESTIMONIOS ===== */
         @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+        /* ===== CATALOGO STATUS ===== */
+        .catalog-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.3rem;
+            gap: 0.3rem;
+            min-height: 20px;
+        }
+        body.dark-mode .catalog-status { color: #a0a0b0; }
+
+        /* ===== REFRESH BUTTON ===== */
+        .refresh-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+            color: white !important;
+            border-color: var(--primary) !important;
+            gap: 0.4rem;
+        }
+        .refresh-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(232, 93, 4, 0.3);
+        }
+        .refresh-btn .fa-spin {
+            animation: fa-spin 0.6s linear infinite;
+        }
+
+        /* ===== SKELETON CARDS ===== */
+        .skeleton-card {
+            pointer-events: none;
+        }
+        .skeleton-card .skeleton {
+            background: linear-gradient(90deg, #e5e7eb 25%, #f0f0f0 50%, #e5e7eb 75%);
+            background-size: 200% 100%;
+            animation: skeletonPulse 1.5s ease-in-out infinite;
+        }
+        body.dark-mode .skeleton-card .skeleton {
+            background: linear-gradient(90deg, #1a1a2e 25%, #22223e 50%, #1a1a2e 75%);
+            background-size: 200% 100%;
+        }
     </style>
 </head>
 <body>
 
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="logo">
-            <video class="logo-img" autoplay muted loop playsinline poster="logo-instalpon.jpeg" aria-label="Logo animado INSTALPON">
+        <div class="logo-wrap" style="display:flex;align-items:center;gap:0.8rem;cursor:pointer;" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+            <video class="logo-img" autoplay muted loop playsinline poster="logo-instalpon.jpeg" aria-label="Logo animado INSTALPON" style="display:block;flex-shrink:0;">
                 <source src="logo-instalpon.mp4" type="video/mp4">
             </video>
-            <span>INSTALPON</span>
-        </a>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;">
+                <span style="font-size:1.6rem;font-weight:800;color:white;letter-spacing:2px;line-height:1;">INSTALPON</span>
+                <a href="https://hunterdouglas.cl/productos/cortinas/" target="_blank" rel="noopener"
+                   style="text-decoration:none;line-height:1;margin-top:3px;white-space:nowrap;"
+                   title="Hunter Douglas - Representante Oficial"
+                   aria-label="Hunter Douglas - Representante Oficial"
+                   onclick="event.stopPropagation()">
+                    <svg viewBox="0 0 220 32" height="14" xmlns="http://www.w3.org/2000/svg" style="display:block;" role="img" aria-label="Hunter Douglas">
+                        <text x="0" y="22" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="18" fill="#6b7b8a">Hunter</text>
+                        <text x="62" y="22" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="18" fill="#6b7b8a">Douglas</text>
+                        <circle cx="178" cy="14" r="12" fill="#f7941d"/>
+                        <line x1="178" y1="2" x2="178" y2="26" stroke="white" stroke-width="2"/>
+                        <line x1="166" y1="14" x2="190" y2="14" stroke="white" stroke-width="2"/>
+                        <path d="M170 7 Q178 14 186 7" stroke="white" stroke-width="1.2" fill="none"/>
+                        <path d="M170 21 Q178 14 186 21" stroke="white" stroke-width="1.2" fill="none"/>
+                    </svg>
+                    <span style="font-size:0.55rem;color:#888;letter-spacing:0.5px;display:block;margin-top:1px;">Representante Oficial</span>
+                </a>
+            </div>
+        </div>
+
 
         <ul class="nav-links">
             <li><a href="#historia">Historia</a></li>
@@ -1917,6 +1977,9 @@
     <!-- ===== FILTROS TIENDA ===== -->
     <div class="filters">
         <div class="filters-container" id="filtersContainer">
+            <button class="filter-btn refresh-btn" id="refreshBtn" onclick="forceRefreshCatalog()" title="Actualizar catálogo desde Google Sheets">
+                <i class="fas fa-sync-alt" id="refreshIcon"></i> Actualizar
+            </button>
             <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
             <button class="filter-btn" onclick="filterProducts('Techumbres')">Techumbres</button>
             <button class="filter-btn" onclick="filterProducts('Revestimientos')">Revestimientos</button>
@@ -1939,6 +2002,7 @@
             <div class="products-header-left">
                 <h2 class="section-title">Catálogo de Productos</h2>
                 <p class="section-subtitle" id="productCount">50 productos disponibles</p>
+                <div class="catalog-status" id="catalogStatus" style="display:none;"></div>
             </div>
             <div class="products-header-right">
                 <span class="pagination-info" id="paginationInfo"></span>
@@ -2014,7 +2078,9 @@
             <a href="mailto:contactos@instalpon.cl"><i class="fas fa-envelope"></i> contactos@instalpon.cl</a>
         </div>
         <p style="margin-top:1rem;font-size:0.85rem;">© 2025 INSTALPON. Todos los derechos reservados.</p>
-        <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Creado por fhollken · 2026</p>
+        <p style="margin-top:0.5rem;font-size:0.8rem;color:#6b7280;">Creado por <a href="https://fhollken.github.io/pcgaming/" target="_blank" rel="noopener" style="color:#e85d04;text-decoration:none;font-weight:600;">fhollken</a> · 2026</p>
+
+        
     </footer>
 
     <!-- ===== CARRITO SIDEBAR ===== -->
@@ -2134,7 +2200,7 @@
             if (e.key === 'ArrowRight') navigateLightbox(1);
         });
 
-        const products = [
+        const productsFallback = [
             { id: 1, name: "Teja Asfáltica Cambridge", category: "Techumbres", price: 28500, img: "https://images.unsplash.com/photo-1518005068251-37900150dfca?w=400&h=300&fit=crop", desc: "Teja asfáltica de alta resistencia. 3,1 m² por paquete. Color negro.", tag: "Más vendido" },
             { id: 2, name: "Teja de Fibrocemento Ondulada", category: "Techumbres", price: 12400, img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop", desc: "Placa ondulada 1,22x1,10m. Espesor 5mm. Resistente a UV.", tag: null },
             { id: 3, name: "Teja Metálica Trapezoidal", category: "Techumbres", price: 18900, img: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop", desc: "Galvanizada prepintada. Largo 3m. Color rojo o verde.", tag: null },
@@ -2187,6 +2253,12 @@
             { id: 50, name: "Guantes de Trabajo Reforzados", category: "Herramientas", price: 6500, img: "https://images.unsplash.com/photo-1600047509358-138a847c19f4?w=400&h=300&fit=crop", desc: "Par de guantes de cuero y nylon. Antideslizantes. Talla única.", tag: null }
         ];
 
+        let products = [...productsFallback];
+        let isLoadingProducts = false;
+        let lastUpdateTime = null;
+        const CSV_CACHE_KEY = 'instalpon_csv_cache';
+        const CSV_TIMESTAMP_KEY = 'instalpon_csv_timestamp';
+
         // ===== DATOS DE FICHA TÉCNICA =====
         const productSpecs = {
             1:{'Marca':'Cambridge','Origen':'USA','Garantía':'25 años','Peso':'12 kg/paquete','Rendimiento':'3,1 m²'},
@@ -2220,6 +2292,182 @@
         }
 
 
+
+        // ===== CARGA DE PRODUCTOS DESDE GOOGLE SHEETS CSV =====
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSE5kD2Y5riYAu34CqlOAUdcnwuLYRuB9H_UKMY5e-3zyJuRnx-DFK8r-QbxC8n_K73NCT4ERCgYuEu/pub?gid=743617309&single=true&output=csv';
+
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        current += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            result.push(current.trim());
+            return result;
+        }
+
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            if (lines.length < 2) return [];
+            const headers = parseCSVLine(lines[0]).map(h => h.replace(/^"|"$/g, ''));
+            const result = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                const values = parseCSVLine(lines[i]).map(v => v.replace(/^"|"$/g, ''));
+                const obj = {};
+                headers.forEach((h, idx) => {
+                    obj[h] = values[idx] !== undefined ? values[idx] : '';
+                });
+                result.push(obj);
+            }
+            return result;
+        }
+
+        function mapCSVToProducts(csvData) {
+            return csvData.map(row => ({
+                id: parseInt(row.ID) || 0,
+                name: row.nombre || 'Sin nombre',
+                category: row.categoria || 'Sin categoría',
+                price: parseInt(row.precio) || 0,
+                img: row.imagen || 'logo-instalpon.jpeg',
+                desc: row.descripcion || '',
+                tag: row.etiqueta && row.etiqueta.trim() ? row.etiqueta.trim() : null
+            })).filter(p => p.id > 0 && p.name !== 'Sin nombre');
+        }
+
+        function saveCSVCache(data) {
+            try {
+                localStorage.setItem(CSV_CACHE_KEY, JSON.stringify(data));
+                localStorage.setItem(CSV_TIMESTAMP_KEY, Date.now().toString());
+            } catch (e) { console.warn('No se pudo guardar caché CSV:', e); }
+        }
+
+        function loadCSVCache() {
+            try {
+                const data = localStorage.getItem(CSV_CACHE_KEY);
+                const ts = localStorage.getItem(CSV_TIMESTAMP_KEY);
+                if (data) {
+                    lastUpdateTime = ts ? new Date(parseInt(ts)) : null;
+                    return JSON.parse(data);
+                }
+            } catch (e) { console.warn('No se pudo leer caché CSV:', e); }
+            return null;
+        }
+
+        function renderSkeletons() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = Array.from({length: 8}, (_, i) => `
+                <div class="product-card skeleton-card">
+                    <div class="product-img-wrap"><div class="skeleton" style="width:100%;height:200px;border-radius:16px 16px 0 0;"></div></div>
+                    <div class="product-info" style="padding:1.2rem;">
+                        <div class="skeleton" style="width:40%;height:12px;margin-bottom:0.5rem;border-radius:4px;"></div>
+                        <div class="skeleton" style="width:70%;height:16px;margin-bottom:0.5rem;border-radius:4px;"></div>
+                        <div class="skeleton" style="width:100%;height:40px;margin-bottom:0.8rem;border-radius:4px;"></div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;">
+                            <div class="skeleton" style="width:30%;height:20px;border-radius:4px;"></div>
+                            <div class="skeleton" style="width:35%;height:36px;border-radius:10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCatalogStatus(status, message) {
+            const statusEl = document.getElementById('catalogStatus');
+            if (!statusEl) return;
+            let icon = 'fa-info-circle';
+            let color = '#6b7280';
+            if (status === 'online') { icon = 'fa-check-circle'; color = '#22c55e'; }
+            if (status === 'cached') { icon = 'fa-history'; color = '#f48c06'; }
+            if (status === 'offline') { icon = 'fa-exclamation-circle'; color = '#ef4444'; }
+            if (status === 'loading') { icon = 'fa-spinner fa-spin'; color = '#e85d04'; }
+            statusEl.innerHTML = `<i class="fas ${icon}" style="color:${color};margin-right:0.4rem;"></i>${message}`;
+            statusEl.style.display = 'flex';
+        }
+
+        async function loadProductsFromCSV() {
+            isLoadingProducts = true;
+            updateCatalogStatus('loading', 'Cargando catálogo...');
+
+            // 1. Cargar desde caché local primero (respuesta inmediata)
+            const cached = loadCSVCache();
+            if (cached && cached.length > 0) {
+                products = cached;
+                renderProducts();
+                updateCatalogStatus('cached', 'Catálogo cargado desde caché');
+            } else {
+                // Sin caché: mostrar skeletons mientras carga
+                renderSkeletons();
+            }
+
+            // 2. Intentar fetch del CSV en segundo plano
+            try {
+                const response = await fetch(CSV_URL);
+                if (!response.ok) throw new Error('Error ' + response.status);
+                const csvText = await response.text();
+                const csvData = parseCSV(csvText);
+                const loadedProducts = mapCSVToProducts(csvData);
+
+                if (loadedProducts.length > 0) {
+                    // Comparar con caché para evitar re-render innecesario
+                    const cachedJSON = cached ? JSON.stringify(cached) : '';
+                    const newJSON = JSON.stringify(loadedProducts);
+
+                    if (newJSON !== cachedJSON) {
+                        products = loadedProducts;
+                        saveCSVCache(loadedProducts);
+                        lastUpdateTime = new Date();
+                        renderProducts();
+                        updateCatalogStatus('online', loadedProducts.length + ' productos actualizados');
+                    } else {
+                        lastUpdateTime = new Date();
+                        updateCatalogStatus('online', 'Catálogo al día');
+                    }
+                } else {
+                    if (!cached || cached.length === 0) {
+                        products = [...productsFallback];
+                        renderProducts();
+                    }
+                    updateCatalogStatus('offline', 'CSV vacío. Catálogo local activo');
+                }
+            } catch (error) {
+                console.warn('⚠️ Error cargando CSV:', error.message);
+                if (!cached || cached.length === 0) {
+                    products = [...productsFallback];
+                    renderProducts();
+                    updateCatalogStatus('offline', 'Sin conexión. Catálogo local');
+                } else {
+                    updateCatalogStatus('offline', 'Sin conexión. Mostrando caché');
+                }
+            } finally {
+                isLoadingProducts = false;
+            }
+        }
+
+        function forceRefreshCatalog() {
+            const icon = document.getElementById('refreshIcon');
+            if (icon) icon.classList.add('fa-spin');
+            localStorage.removeItem(CSV_CACHE_KEY);
+            localStorage.removeItem(CSV_TIMESTAMP_KEY);
+            loadProductsFromCSV().then(() => {
+                setTimeout(() => { if (icon) icon.classList.remove('fa-spin'); }, 800);
+            });
+        }
+
         let cart = [];
         let currentFilter = 'todos';
         const ITEMS_PER_PAGE = 12;
@@ -2234,6 +2482,16 @@
             currentFilter = filter;
             currentPage = page;
             const grid = document.getElementById('productsGrid');
+
+            // Si está cargando y no hay productos aún, mostrar skeletons
+            if (isLoadingProducts && products.length === 0) {
+                renderSkeletons();
+                document.getElementById('productCount').textContent = 'Cargando productos...';
+                document.getElementById('pagination').innerHTML = '';
+                if (document.getElementById('paginationInfo')) document.getElementById('paginationInfo').textContent = '';
+                return;
+            }
+
             currentFiltered = filter === 'todos' ? [...products] : products.filter(p => p.category === filter);
 
             const totalItems = currentFiltered.length;
@@ -2419,7 +2677,6 @@
         
         // ===== LOCALSTORAGE CARRITO =====
         const CART_KEY = 'instalpon_cart';
-        let savedCart = null;
 
         function saveCart() {
             localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -2450,11 +2707,6 @@
         function dismissRestore() {
             const toast = document.getElementById('restoreToast');
             if (toast) toast.classList.remove('show');
-            savedCart = null;
-        }
-
-        function confirmRestore() {
-            dismissRestore();
         }
 
         // ===== BÚSQUEDA DE PRODUCTOS =====
@@ -2696,7 +2948,7 @@
         });
 
         renderGallery();
-        renderProducts();
+        loadProductsFromCSV();
 
         // ===== PWA - SERVICE WORKER =====
         if ('serviceWorker' in navigator) {
@@ -2724,7 +2976,61 @@
                 .total{font-size:1.3rem;font-weight:bold;color:#e85d04;margin-top:10px;padding-top:15px;border-top:2px solid #e85d04;display:flex;justify-content:space-between}
                 .footer{margin-top:40px;font-size:0.85rem;color:#666;text-align:center}
                 .date{color:#999;font-size:0.9rem;margin-bottom:20px}
-                </style></head><body>
+        
+        /* Hunter Douglas Official Link */
+        .hd-link {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-decoration: none !important;
+            border-left: 1px solid rgba(255,255,255,0.12);
+            padding-left: 14px;
+            margin-left: 10px;
+            transition: opacity 0.2s;
+            gap: 3px;
+        }
+        .hd-link:hover { opacity: 0.75; }
+        .hd-link img {
+            height: 18px;
+            width: auto;
+            display: block;
+        }
+        .hd-link-sub {
+            font-size: 0.55rem;
+            font-weight: 700;
+            color: #e85d04 !important;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: block;
+            text-decoration: none !important;
+        }
+        /* Footer HD */
+        .hd-footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none !important;
+            transition: opacity 0.2s;
+        }
+        .hd-footer-link:hover { opacity: 0.75; }
+        .hd-footer-link img {
+            height: 16px;
+            width: auto;
+            display: block;
+            opacity: 0.85;
+        }
+        .hd-footer-rep {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #e85d04 !important;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            text-decoration: none !important;
+        }
+        @media (max-width: 768px) {
+            .hd-link { display: none; }
+        }
+        </style></head><body>
                 <div class="logo"><img src="logo-instalpon.jpeg" alt="INSTALPON Logo"><h1>INSTALPON</h1></div>
                 <p class="date">Cotización generada el ${new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'})}</p>
                 <h2>Detalle de Productos</h2>
