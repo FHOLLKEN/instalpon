@@ -1980,14 +1980,6 @@
             <button class="filter-btn refresh-btn" id="refreshBtn" onclick="forceRefreshCatalog()" title="Actualizar catálogo desde Google Sheets">
                 <i class="fas fa-sync-alt" id="refreshIcon"></i> Actualizar
             </button>
-            <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
-            <button class="filter-btn" onclick="filterProducts('Techumbres')">Techumbres</button>
-            <button class="filter-btn" onclick="filterProducts('Revestimientos')">Revestimientos</button>
-            <button class="filter-btn" onclick="filterProducts('Aislamiento')">Aislamiento</button>
-            <button class="filter-btn" onclick="filterProducts('Tabiquería')">Tabiquería</button>
-            <button class="filter-btn" onclick="filterProducts('Impermeabilización')">Impermeabilización</button>
-            <button class="filter-btn" onclick="filterProducts('Pisos')">Pisos</button>
-            <button class="filter-btn" onclick="filterProducts('Herramientas')">Herramientas</button>
         </div>
     </div>
 
@@ -2408,6 +2400,7 @@
             if (cached && cached.length > 0) {
                 products = cached;
                 renderProducts();
+                renderFilters();
                 updateCatalogStatus('cached', 'Catálogo cargado desde caché');
             } else {
                 // Sin caché: mostrar skeletons mientras carga
@@ -2432,6 +2425,7 @@
                         saveCSVCache(loadedProducts);
                         lastUpdateTime = new Date();
                         renderProducts();
+                        renderFilters();
                         updateCatalogStatus('online', loadedProducts.length + ' productos actualizados');
                     } else {
                         lastUpdateTime = new Date();
@@ -2449,6 +2443,7 @@
                 if (!cached || cached.length === 0) {
                     products = [...productsFallback];
                     renderProducts();
+                    renderFilters();
                     updateCatalogStatus('offline', 'Sin conexión. Catálogo local');
                 } else {
                     updateCatalogStatus('offline', 'Sin conexión. Mostrando caché');
@@ -2466,6 +2461,28 @@
             loadProductsFromCSV().then(() => {
                 setTimeout(() => { if (icon) icon.classList.remove('fa-spin'); }, 800);
             });
+        }
+
+        function renderFilters() {
+            const container = document.getElementById('filtersContainer');
+            if (!container) return;
+
+            // Obtener categorías únicas de los productos actuales
+            const categories = [...new Set(products.map(p => p.category).filter(c => c && c !== 'Sin categoría'))].sort();
+
+            // Generar HTML: Actualizar + Todos + categorías
+            let html = `
+                <button class="filter-btn refresh-btn" id="refreshBtn" onclick="forceRefreshCatalog()" title="Actualizar catálogo desde Google Sheets">
+                    <i class="fas fa-sync-alt" id="refreshIcon"></i> Actualizar
+                </button>
+                <button class="filter-btn ${currentFilter === 'todos' ? 'active' : ''}" onclick="filterProducts('todos')" data-filter="todos">Todos</button>
+            `;
+
+            categories.forEach(cat => {
+                html += `<button class="filter-btn ${currentFilter === cat ? 'active' : ''}" onclick="filterProducts('${cat}')" data-filter="${cat}">${cat}</button>`;
+            });
+
+            container.innerHTML = html;
         }
 
         let cart = [];
@@ -2577,7 +2594,7 @@
             currentPage = 1;
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.includes(category === 'todos' ? 'Todos' : category)) btn.classList.add('active');
+                if (btn.dataset.filter === category) btn.classList.add('active');
             });
             renderProducts(category, 1);
         }
